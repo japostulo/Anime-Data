@@ -20,7 +20,7 @@ titleCarousel.innerHTML=titleParameter;
 
 //CRIANDO O CAROUSEL
 var slider = document.createElement("div");
-slider.setAttribute("class","owl-carousel owl-theme");
+slider.setAttribute("class","owl-carousel owl-theme text-center");
 slider.setAttribute("id",idNotDefined);
 
 var btnNext = document.createElement("span");
