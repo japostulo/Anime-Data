@@ -10,16 +10,63 @@
     <script type="text/javascript" src="search.js"></script>
     <script type="text/javascript" src="carousel.js"></script>
     <script type="text/javascript" src="index.js"></script>
+    <style media="screen">
+      #teste{
+        position: relative;
+  			height: 100%;
+  			background-repeat: no-repeat;
+  			background-size: cover;
+  			background-attachment: fixed;
+        background-image: url("images/kimi-no-na-wa.jpg")
+      }
+      .anime{
+        color:white;
+        font-weight: bold;
+        font-size:5rem;
+        font-family:"Impact";
+      }
+      .data{
+        color:#d92145;
+
+      }
+    </style>
   </head>
   <body onload="loadHome()">
-    <div class="container-fluid" id="carouselContainer">
-      <div class="row">
-        <div class="col-3 d-flex">
-          <input type="text" class="form-control" id="inputAnime"> <input type="button" class="btn btn-primary ml-2" value="Enviar" onclick="search('null', 'animeSearch')">
+    <div class="wrapper">
+      <div class="container-fluid" id="teste" style="height:40rem;">
+
+        <div class="row h-50 pt-5">
+          <div class="col d-flex justify-content-center align-items-end">
+              <span class="h1 anime">Anime <span class="data">Data</span></span>
+          </div>
         </div>
+
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-5 d-flex">
+            <!-- <input type="button" class="btn btn-primary ml-2" value="Enviar" onclick="search('null', 'animeSearch')"> -->
+            <!-- <input type="text" class="form-control mb-2 fa fa-search" id="inputAnime"> <span class="fa fa-2x fa-search fa-inverse ml-2 p-1 border"></span> -->
+            <div class="input-group">
+              <input type="text" id="inputAnime" class="form-control" placeholder="Pesquisar">
+              <div class="input-group-prepend">
+                <span class="input-group-text fa fa-search" onclick="search('null', 'animeSearch')"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
+      <div class="container-fluid" id="carouselContainer">
+        <div class="row">
+          <div class="col-3 d-flex">
+
+          </div>
+        </div>
+
+      </div>
     </div>
+
 
     <script src="https://unpkg.com/mustache@latest"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
