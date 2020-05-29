@@ -1,20 +1,59 @@
-function search(id, funcao){
+async function search(id, funcao){
   var anime = document.getElementById("inputAnime").value;
 
   if(funcao == 'animeSearch'){
-    connectionApi(animeSearch(anime));
+    try{
+      data = await connectionApi(animeSearch(anime));
+      return data.data.results;
+    }
+
+    catch(error){
+      console.log(error)
+    }
   }
+
   else if(funcao == 'animeTop'){
-    connectionApi(animeTop());
+    try{
+    data = await connectionApi(animeTop());
+    return data.data.top;
+    }
+
+    catch(error){
+      console.log(error)
+    }
+
   }
+
   else if(funcao == 'animeWeek'){
-    connectionApi(animeWeek(dayOfTheWeek()));
+    try{
+    data = await connectionApi(animeWeek(dayOfTheWeek()));
+    return data.data;
+    }
+
+    catch(error){
+      console.log(error)
+    }
   }
+
   else if(funcao == 'animeGender'){
-    connectionApi(animeTop());
+    try{
+    data = await connectionApi(animeTop());
+    return data.data;
+    }
+
+    catch(error){
+      console.log(error)
+    }
   }
   else if(funcao == 'animeData'){
-    connectionApi(animeData(id));
+    try{
+    data = await connectionApi(animeData(id));
+    return data.data;
+    }
+
+    catch(error){
+      console.log(error)
+    }
   }
   else{
     console.error("Function isn't defined")
@@ -41,20 +80,8 @@ function animeData(mal_id){
   return `https://api.jikan.moe/v3/anime/${mal_id}`;
 }
 
-function setData(data){
-  animeData = data;
-}
-
-function getData(){
-  return animeData;
-}
-
-async function connectionApi(animeQuery){
-    var data = await axios.get(animeQuery)
-   .then(resp => resp)
-   .catch(error => error)
-   .finally(term => term);
-   setData(data.data);
+function connectionApi(animeQuery){
+    return axios.get(animeQuery);
 }
 
 function dayOfTheWeek(){
