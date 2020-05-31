@@ -10,8 +10,9 @@
     <script type="text/javascript" src="search.js"></script>
     <script type="text/javascript" src="carousel.js"></script>
     <script type="text/javascript" src="index.js"></script>
+    <!-- default page-style -->
     <style media="screen">
-      #teste{
+      #search{
         position: relative;
   			height: 100%;
   			background-repeat: no-repeat;
@@ -22,83 +23,87 @@
       .anime{
         color:white;
         font-weight: bold;
-        font-size:5rem;
         font-family:"Impact";
       }
       .data{
         color:#d92145;
       }
+
+      .fa-search:hover{
+        color: #ffffff;
+        background-color:#343a40;
+        cursor:pointer;
+      }
     </style>
   </head>
+
   <body onload="loadHome()">
     <div class="wrapper">
-      <nav class="navbar navbar-expand-lg navbar-light position-abolute">
-        <a class="navbar-brand" href="#">Navbar</a>
+
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light position-abolute d-absolute">
+        <a class="navbar-brand anime border-right pr-3" href="#">Anime <span class="data">Data</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
           <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Ação</a>
-                <a class="dropdown-item" href="#">Outra ação</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Algo mais aqui</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Desativado</a>
-            </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+
+          <form class="form-inline my-2 my-lg-0" id="searchNav" style='display:none;'>
+            <div class="input-group">
+              <input type="text" id="inputAnimeNav" class="form-control" placeholder="Pesquisar">
+              <div class="input-group-prepend">
+                <span class="input-group-text fa fa-search" onclick="homeSearch()"></span>
+              </div>
+            </div>
           </form>
+
         </div>
       </nav>
 
-      <div class="container-fluid" id="teste" style="height:40rem;">
-        <div class="row h-50 pt-5">
-          <div class="col d-flex justify-content-center align-items-end">
-              <span class="h1 anime">Anime <span class="data">Data</span></span>
+      <!-- Div com o container da pesquisa e carousel  -->
+      <div id="content">
+        <!-- container de pesquisa -->
+        <div class="container-fluid" id="search" style="height:40rem;">
+          <div class="row h-50 pt-5">
+            <div class="col d-flex justify-content-center align-items-end">
+              <span class="h1 anime" style="font-size:5rem;">Anime <span class="data">Data</span></span>
+            </div>
           </div>
-        </div>
 
-        <div class="row d-flex justify-content-center align-items-center">
-          <div class="col-5 d-flex">
-            <!-- <input type="button" class="btn btn-primary ml-2" value="Enviar" onclick="search('null', 'animeSearch')"> -->
-            <!-- <input type="text" class="form-control mb-2 fa fa-search" id="inputAnime"> <span class="fa fa-2x fa-search fa-inverse ml-2 p-1 border"></span> -->
-            <div class="input-group input-group-lg">
-              <input type="text" id="inputAnime" class="form-control" placeholder="Pesquisar">
-              <div class="input-group-prepend">
-                <span class="input-group-text fa fa-search" onclick="search('null', 'animeSearch')"></span>
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-5 d-flex">
+              <div class="input-group input-group-lg" id="searchDefault">
+                <input type="text" id="inputAnime" class="form-control" placeholder="Pesquisar">
+                <div class="input-group-prepend">
+                  <span class="input-group-text fa fa-search" onclick="homeSearch()"></span>
+                </div>
               </div>
             </div>
-
           </div>
         </div>
 
-      </div>
-
-      <div class="container-fluid" id="carouselContainer">
-        <div class="row">
-          <div class="col-3 d-flex">
-
+        <!-- container dos carousel -->
+        <div class="container-fluid" id="carouselContainer">
+          <div class="row">
+            <div class="col-3 d-flex">
+            </div>
           </div>
         </div>
-
       </div>
+
+      <!-- container do resultado da pesquisa -->
+      <div class="container-fluid" id="searchContainer">
+      </div>
+
+      <div class="container-fluid text-center">
+        FOOTER
+      </div>
+
     </div>
 
 
