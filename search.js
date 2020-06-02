@@ -99,8 +99,8 @@ function animeData(mal_id){
   return `https://api.jikan.moe/v3/anime/${mal_id}`;
 }
 
-async function connectionApi(animeQuery, config ={}){
 
+async function connectionApi(animeQuery, config ={}){
     return axios.get(animeQuery, config);
 }
 
