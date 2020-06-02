@@ -134,12 +134,10 @@ function a(){
 }
 
 function createCardSearch(array, idAppend, titleS){
-  //Resetando a container para se caso tiver alguma coisa limpar e adicionar o atualizado
   document.getElementById(idAppend).innerHTML="";
   document.getElementById("inputAnime").value="";
   document.getElementById("content").style.display="none";
-  let searchContainer = document.getElementById("searchContainer");
-  searchContainer.removeAttribute("style");
+
   let a = document.getElementById("searchNav");
   a.removeAttribute("style");
 
