@@ -137,6 +137,7 @@ function createCardSearch(array, idAppend, titleS){
   document.getElementById(idAppend).innerHTML="";
   document.getElementById("inputAnime").value="";
   document.getElementById("content").style.display="none";
+
   let a = document.getElementById("searchNav");
   a.removeAttribute("style");
 
