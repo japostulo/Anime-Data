@@ -54,16 +54,13 @@ text-overflow: ellipsis;
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#" onclick="home()">Home <span class="sr-only">(página atual)</span></a>
+              <a class="nav-link" href="#" id="btnHome" onclick="toggleSearchBar(this)">Home <span class="sr-only">(página atual)</span></a>
             </li>
           </ul>
 
-          <form class="form-inline my-2 my-lg-0" id="searchNav" style='display:none;'>
-            <div class="input-group">
-              <input type="text" id="inputAnimeNav" class="form-control" placeholder="Pesquisar">
-              <div class="input-group-prepend">
-                <span class="input-group-text fa fa-search" onclick="homeSearch()"></span>
-              </div>
+          <!-- Barra de pesquisa -->
+          <form class="form-inline my-2 my-lg-0">
+            <div class="input-group" id="searchNav">
             </div>
           </form>
 
@@ -80,6 +77,7 @@ text-overflow: ellipsis;
             </div>
           </div>
 
+          <!-- Barra de pesquisa principal -->
           <div class="row d-flex justify-content-center align-items-center">
             <div class="col-5 d-flex">
               <div class="input-group input-group-lg" id="searchDefault">
