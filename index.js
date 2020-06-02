@@ -28,7 +28,7 @@ function createSearchBar(id){
   //definindo elementos da barra de pesquisa
   let input = document.createElement("input");
   input.setAttribute("type", "text");
-  input.setAttribute("id", "inputAnimeNav");
+  input.setAttribute("id", "inputAnime");
   input.setAttribute("class", "form-control");
   input.setAttribute("placeholder", "Pesquisar");
 
@@ -47,17 +47,18 @@ function createSearchBar(id){
 
 //Trocando input de pesquisa de local
 function toggleSearchBar(obj){
-  
-  if(document.getElementById("searchDefault").children.length == 1){
+  console.log((document.getElementById("searchDefault").children.length));
+  if(document.getElementById("searchDefault").children.length >= 1){
     console.log("if");
     document.getElementById("searchDefault").innerHTML = "";
-    document.getElementById("content").style.visibility = "hidden";
+    document.getElementById("content").style.display="none";
     createSearchBar("searchNav");
   }
   else if(obj.id == 'btnHome'){
     console.log("else");
     document.getElementById("searchNav").innerHTML = "";
-    document.getElementById("content").style.visibility = "visible";
+    document.getElementById("content").style.display="block";
     createSearchBar("searchDefault");
+    document.getElementById("searchContainer").innerHTML="";
   }
 }
