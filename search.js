@@ -1,13 +1,7 @@
 async function search(id, funcao){
-  var anime;
-  if(document.getElementById("inputAnime").value!=""){
-     anime = document.getElementById("inputAnime").value;
-  }else{
-     anime = document.getElementById("inputAnimeNav").value;
-     console.log(anime);
-
-  }
-
+  var anime = document.getElementById("inputAnime").value;
+  toggleSearchBar();
+  
   if(funcao == 'animeSearch'){
     try{
       data = await connectionApi(animeSearch(anime));
@@ -99,8 +93,8 @@ function animeData(mal_id){
   return `https://api.jikan.moe/v3/anime/${mal_id}`;
 }
 
-async function connectionApi(animeQuery, config ={}){
 
+async function connectionApi(animeQuery, config ={}){
     return axios.get(animeQuery, config);
 }
 
