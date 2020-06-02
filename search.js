@@ -1,5 +1,12 @@
 async function search(id, funcao){
-  var anime = document.getElementById("inputAnime").value;
+  var anime;
+  if(document.getElementById("inputAnime").value!=""){
+     anime = document.getElementById("inputAnime").value;
+  }else{
+     anime = document.getElementById("inputAnimeNav").value;
+     console.log(anime);
+
+  }
 
   if(funcao == 'animeSearch'){
     try{
@@ -26,18 +33,30 @@ async function search(id, funcao){
 
   else if(funcao == 'animeWeek'){
     try{
+    let week = dayOfTheWeek();
+    week = week.toLowerCase();
     data = await connectionApi(animeWeek(dayOfTheWeek()));
-    return data.data;
+    return data.data[week];
     }
 
     catch(error){
-      console.log(error)
+
     }
   }
 
   else if(funcao == 'animeGender'){
     try{
-    data = await connectionApi(animeTop());
+      let config = {
+        crossdomain: true,
+        headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        }
+
+      };
+
+    data = await connectionApi(animeGender(), config);
+    console.log("Teste", data);
     return data.data;
     }
 
@@ -61,7 +80,7 @@ async function search(id, funcao){
 }
 
 function animeSearch(anime){
-  return `https://api.jikan.moe/v3/search/anime?q=${anime}`;
+  return `https://api.jikan.moe/v3/search/anime?q=${anime}&limit=10`;
 }
 
 function animeTop(){
@@ -80,12 +99,13 @@ function animeData(mal_id){
   return `https://api.jikan.moe/v3/anime/${mal_id}`;
 }
 
-function connectionApi(animeQuery){
-    return axios.get(animeQuery);
+async function connectionApi(animeQuery, config ={}){
+
+    return axios.get(animeQuery, config);
 }
 
 function dayOfTheWeek(){
-  var dayOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Friday', 'Sunday'];
+  var dayOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   var day = [1,2,3,4,5,6,0];
   var date = new Date();
   date = date.getDay();
