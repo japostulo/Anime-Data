@@ -1,13 +1,7 @@
 async function search(id, funcao){
-  var anime;
-  if(document.getElementById("inputAnime").value!=""){
-     anime = document.getElementById("inputAnime").value;
-  }else{
-     anime = document.getElementById("inputAnimeNav").value;
-     console.log(anime);
-
-  }
-
+  var anime = document.getElementById("inputAnime").value;
+  toggleSearchBar();
+  
   if(funcao == 'animeSearch'){
     try{
       data = await connectionApi(animeSearch(anime));
