@@ -40,13 +40,23 @@ async function search(id, funcao){
     }
 
     catch(error){
-      console.log(error)
+
     }
   }
 
   else if(funcao == 'animeGender'){
     try{
-    data = await connectionApi(animeTop());
+      let config = {
+        crossdomain: true,
+        headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        }
+
+      };
+
+    data = await connectionApi(animeGender(), config);
+    console.log("Teste", data);
     return data.data;
     }
 
@@ -89,8 +99,9 @@ function animeData(mal_id){
   return `https://api.jikan.moe/v3/anime/${mal_id}`;
 }
 
-async function connectionApi(animeQuery){
-    return axios.get(animeQuery);
+
+async function connectionApi(animeQuery, config ={}){
+    return axios.get(animeQuery, config);
 }
 
 function dayOfTheWeek(){
