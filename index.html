@@ -5,8 +5,8 @@
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Tangerine" >
     <link rel="stylesheet" href="carousel/owl.carousel.css">
-
     <!-- default page-style -->
     <style media="screen">
       #search{
@@ -39,14 +39,19 @@
         background-color:#343a40;
         cursor:pointer;
       }
+      .fa-arrow-circle-up:hover{
+        color: #ffffff;
+        cursor:pointer;
+        transform: scale(1.2,1.2);
+      }
     </style>
   </head>
 
   <body onload="loadHome()">
-    <div class="wrapper">
+    <div class="wrapper" style="background-color:#001829">
 
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light position-abolute d-absolute" id="testeNav">
+      <nav class="navbar navbar-expand-lg navbar-light position-abolute d-absolute bg-light" id="navAnchor">
         <a class="navbar-brand anime border-right pr-3" href="#">Anime <span class="data">Data</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
           <span class="navbar-toggler-icon"></span>
@@ -89,7 +94,7 @@
         </div>
 
         <!-- container dos carousel -->
-        <div class="container-fluid" id="carouselContainer">
+        <div class="container bg-light" id="carouselContainer">
           <div class="row">
             <div class="col-3 d-flex">
             </div>
@@ -98,7 +103,7 @@
       </div>
 
       <!-- container do resultado da pesquisa -->
-      <div class="container-fluid" id="searchContainer">
+      <div class="container bg-light" id="searchContainer">
       </div>
 
       <!-- FOOTER -->
@@ -131,7 +136,7 @@
           <div class="col-4">
             <!-- Arrow-UP Archor -->
             <div class="d-flex align-items-start justify-content-end">
-              <a class="fa fa-3x fa-inverse fa-arrow-circle-up" href="#testeNav"></a>
+              <a class="fa fa-3x fa-inverse fa-arrow-circle-up" style="text-decoration:none;transition:0.5s" href="#navAnchor"></a>
             </div>
             <!-- Menu Footer -->
             <div class="d-flex align-items-center justify-content-center">
