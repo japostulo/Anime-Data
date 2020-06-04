@@ -20,9 +20,9 @@
 
       .footer{
         white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-  background-image: url("images/data.jpg")
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background-image: url("images/data.jpg")
       }
 
       .anime{
@@ -46,16 +46,14 @@ text-overflow: ellipsis;
     <div class="wrapper">
 
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light position-abolute d-absolute">
+      <nav class="navbar navbar-expand-lg navbar-light position-abolute d-absolute" id="testeNav">
         <a class="navbar-brand anime border-right pr-3" href="#">Anime <span class="data">Data</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#" id="btnHome" onclick="toggleSearchBar(this)">Home <span class="sr-only">(página atual)</span></a>
-            </li>
+          <ul class="navbar-nav mr-auto" id="navBar">
+            <!-- Template engine navbar -->
           </ul>
 
           <!-- Barra de pesquisa -->
@@ -103,26 +101,73 @@ text-overflow: ellipsis;
       <div class="container-fluid" id="searchContainer">
       </div>
 
-      <!-- Footer -->
-      <div class="container-fluid footer bg-dark">
-        <div class="row d-flex justify-content-center" >
-          <img src="images/goku-footer.png" class="position-absolute" style="width:50rem" >
-          <div class="col d-flex col-md-auto align-items-center justify-content-center">
-            <ul class="d-flex p-0 mt-3" id="midiaFooter">
-              <!-- Add Mídia with Mustache -->
-            </ul>
+      <!-- FOOTER -->
+      <div class="container-fluid">
 
+        <!-- Black Row superior -->
+        <div class="row" style="background-color:black;">
 
-            <ul class="d-flex p-0 m-0" id="menuFooter">
-            <!-- Add Items with Mustache -->
-            <li></li>
-            </ul>
+          <!-- Midia Footer  -->
+          <div class="col-4">
+            <!-- Titulo Midia Footer -->
+            <div class="row d-flex align-items-center justify-content-center pt-4">
+              <span class="text-white h6">Siga-nos</span><br>
+            </div>
+
+            <!-- Midia Footer -->
+            <div class="row d-flex align-items-center justify-content-center">
+                <span id="midiaFooter" class="d-flex"></span>
+            </div>
           </div>
-        </div>
-        <div class="row d-flex justify-content-center" id="footerCopyright">
+
+          <!-- IMG Solo Leveling -->
+          <div class="col-4 pb-5 mb-5">
+            <div class="d-flex justify-content-center">
+              <img src="images/solo-leveling1.png" class="position-absolute"  style="width:8rem;" >
+            </div>
+          </div>
+
+          <!-- Arrow-UP, Menu Footer -->
+          <div class="col-4">
+            <!-- Arrow-UP Archor -->
+            <div class="d-flex align-items-start justify-content-end">
+              <a class="fa fa-3x fa-inverse fa-arrow-circle-up" href="#testeNav"></a>
+            </div>
+            <!-- Menu Footer -->
+            <div class="d-flex align-items-center justify-content-center">
+              <span class="text-white d-flex" id="menuFooter"></span>
+            </div>
+          </div>
 
         </div>
+        <!-- Termino Black Row -->
+
+        <!-- Newslatter, imagem e copyright -->
+        <div class="row pt-4 pb-4" style="background-color:#001829;">
+
+          <!-- Newslatter -->
+          <div class="col-4">
+            <div class="d-flex align-items-center justify-content-center">
+              <span class="text-white" style="font-weight:bold" >ASSINE NOSSA NEWSLATTER</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center">
+              <input type="text" class="form-control col-md-6 bg-dark" placeholder="coloque seu e-mail" style="border:none"> <input type="button" class="btn btn-primary ml-2"value="Assine">
+            </div>
+          </div>
+
+          <!-- Div central que contem o espaçamento da imagem -->
+          <div class="col-4"></div>
+
+          <!-- Copyright -->
+          <div class="col-4 d-flex align-items-end justify-content-center">
+              <span class="text-white" id="footerCopyright"></span>
+          </div>
+
+        </div>
+        <!-- Término Newslatter -->
+
       </div>
+      <!-- Término Footer -->
 
     </div>
 
