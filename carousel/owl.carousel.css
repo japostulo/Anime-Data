@@ -5,6 +5,15 @@
   transform: scale(1.1,1.1);
   cursor: pointer;
 }
+.btnCarousel:hover{
+  background-color:#343a40;
+  transition: 0.3s;
+}
+.btnCarousel:hover span{
+  opacity:1.0;
+  color:#ffffff;
+}
+
 /* CONFIG DOS DOTS DO CAROUSEL */
   .owl-theme .owl-dots {
     text-align: center;
