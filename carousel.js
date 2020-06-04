@@ -47,6 +47,21 @@ imageCard.setAttribute("class","card-img-top");
 imageCard.setAttribute("src",item.image_url);
 imageCard.setAttribute("style","height:15rem");
 
+if(titleParameter=="Animes mais assistidos"){
+
+var rank = document.createElement("span");
+rank.setAttribute("class","position-absolute pr-4");
+// rank.setAttribute("style","right:10px;top:-5px;border-radius:0 0px 20px 20px"); style de cartão
+rank.setAttribute("style","right:-5px;top:-5px; width: 0;height: 0;border-top: 40px solid #007bff;border-right: 40px solid #007bff;border-bottom:30px solid transparent;border-left: 10px solid transparent;");
+card.append(rank);
+
+var numberRANK = document.createElement("span");
+numberRANK.setAttribute("class","position-absolute text-white h1");
+numberRANK.setAttribute("style","right:0;top:-10px;font-family: 'Tangerine', serif;");
+numberRANK.innerHTML=(i+1);
+card.append(numberRANK);
+}
+
 var cardBody = document.createElement("div");
 cardBody.setAttribute("class","card-body d-flex align-items-center justify-content-center p-0");
 cardBody.setAttribute("style","");
@@ -64,10 +79,12 @@ new ClipboardJS('#t'+item.mal_id);
 //FIM CRIANDO CARD
 
 if(item.score !=null){
-  var badge = document.createElement("span");
-  badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
-  badge.innerHTML="Score: "+item.score;
-  card.append(badge);
+  if(titleParameter!="Animes mais assistidos"){
+    var badge = document.createElement("span");
+    badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
+    badge.innerHTML="Score: "+item.score;
+    card.append(badge);
+  }
 }
 //dando append titulo > col > rol.
 rowTitle.append(colTitle);
@@ -127,7 +144,11 @@ document.getElementById(idAppend).append(slider);
 }
 
 function tooltipCopy(a){
-  $('#'+a.id).attr("title", "Copiado!").tooltip('_fixTitle').tooltip('show').attr("title", "Copiar titulo").tooltip('_fixTitle');
+  console.log(a.id);
+  // $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle').tooltip('show').attr("title", "Copiar titulo").tooltip('_fixTitle');
+  $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle');
+  $('#'+a.id).tooltip('show');
+  $('.card-title').attr("title", "Copiar titulo").tooltip('_fixTitle');
 }
 function a(){
 
