@@ -234,4 +234,5 @@ function createCardSearch(array, idAppend, titleS){
     }
   }
   });
+
 }
