@@ -2,7 +2,6 @@
 //CRIANDO UM CAROUSEL PASSANDO UM ARRAY (NORMALMENTE PASSANDO UM ARRAY TRABALHADO).
 var qtdCarousel = 0;
 function createCarousel(array,idAppend,titleParameter){
-  console.log("entrou");
   //FUNÇÃO DE INICIALIZAÇÃO DO TOOLTIP
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -188,6 +187,7 @@ function createCardSearch(array, idAppend, titleS){
   line2.setAttribute("class","row mt-4 d-flex justify-content-center");
   document.getElementById(idAppend).append(line2);
 
+
   array.forEach((item,i) => {
   var card = document.createElement("div");
   card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
@@ -234,5 +234,3 @@ function createCardSearch(array, idAppend, titleS){
     }
   }
   });
-
-}
