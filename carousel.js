@@ -50,12 +50,19 @@ array.forEach((item,i) => {
 var card = document.createElement("div");
 card.setAttribute("class","item card d-inline-flex md-auto rounded shadow-lg border");
 card.setAttribute("style","width:13rem;height:18rem;z-index:1;");
-card.setAttribute("id",item.mal_id);
 
 var imageCard = document.createElement("img");
 imageCard.setAttribute("class","card-img-top");
 imageCard.setAttribute("src",item.image_url);
 imageCard.setAttribute("style","height:15rem");
+imageCard.setAttribute("onclick","releaseMal(this)");
+imageCard.setAttribute("target","_blank");
+imageCard.setAttribute("href","/info.html?mal="+item.mal_id);
+
+var linkImage = document.createElement("a");
+linkImage.setAttribute("id",item.mal_id);
+linkImage.setAttribute("target","_blank");
+linkImage.setAttribute("href","info.html");
 
   if(titleParameter=="Animes mais assistidos"){
     var rank = document.createElement("span");
@@ -100,7 +107,8 @@ rowTitle.append(colTitle);
 colTitle.append(titleCarousel);
 
 slider.append(card);
-card.append(imageCard);
+linkImage.append(imageCard);
+card.append(linkImage);
 card.append(cardBody);
 cardBody.append(title);
 
@@ -195,12 +203,16 @@ function createCardSearch(array, idAppend, titleS){
   var card = document.createElement("div");
   card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
   card.setAttribute("style","width:13rem;height:18rem;z-index:1;");
-  card.setAttribute("id",item.mal_id);
 
   var imageCard = document.createElement("img");
   imageCard.setAttribute("class","card-img-top");
   imageCard.setAttribute("src",item.image_url);
   imageCard.setAttribute("style","height:15rem");
+
+  var linkImage = document.createElement("a");
+  linkImage.setAttribute("id",item.mal_id);
+  linkImage.setAttribute("target","_blank");
+  linkImage.setAttribute("href","info.html");
 
   var cardBody = document.createElement("div");
   cardBody.setAttribute("class","card-body d-flex align-items-center justify-content-center p-0");
@@ -225,7 +237,8 @@ function createCardSearch(array, idAppend, titleS){
     card.append(badge);
   }
 
-  card.append(imageCard);
+  linkImage.append(imageCard);
+  card.append(linkImage);
   card.append(cardBody);
   cardBody.append(title);
 
@@ -237,8 +250,5 @@ function createCardSearch(array, idAppend, titleS){
     }
   }
   });
-
-}
-function next(){
 
 }
