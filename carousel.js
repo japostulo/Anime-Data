@@ -2,6 +2,7 @@
 //CRIANDO UM CAROUSEL PASSANDO UM ARRAY (NORMALMENTE PASSANDO UM ARRAY TRABALHADO).
 var qtdCarousel = 0;
 function createCarousel(array,idAppend,titleParameter){
+  console.log("entrou");
   //FUNÇÃO DE INICIALIZAÇÃO DO TOOLTIP
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -147,7 +148,7 @@ document.getElementById(idAppend).append(slider);
         items:5
       },
       1400:{
-        items:6
+        items:5
       }
     }
   });
@@ -169,9 +170,6 @@ function tooltipCopy(a){
   $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle');
   $('#'+a.id).tooltip('show');
   $('.card-title').attr("title", "Copiar titulo").tooltip('_fixTitle');
-}
-function a(){
-
 }
 
 function createCardSearch(array, idAppend, titleS){
@@ -197,7 +195,6 @@ function createCardSearch(array, idAppend, titleS){
   var line2 = document.createElement("div");
   line2.setAttribute("class","row mt-4 d-flex justify-content-center");
   document.getElementById(idAppend).append(line2);
-
 
   array.forEach((item,i) => {
   var card = document.createElement("div");
