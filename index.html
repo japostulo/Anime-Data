@@ -18,6 +18,29 @@
         background-image: url("images/kimi-no-na-wa.jpg")
       }
 
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 10rem;
+        height: 10rem;
+        margin: 0 auto;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+
+      }
+
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
       .footer{
         white-space: nowrap;
         overflow: hidden;
@@ -104,6 +127,7 @@
 
       <!-- container do resultado da pesquisa -->
       <div class="container bg-light" id="searchContainer">
+
       </div>
 
       <!-- FOOTER -->

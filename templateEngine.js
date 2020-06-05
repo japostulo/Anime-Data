@@ -2,6 +2,7 @@ var data = {
     navBar:[
       {
         Item:'Home',
+        id:'btnHome',
         click:'toggleSearchBar(this)'
       }
     ],
@@ -37,7 +38,7 @@ var data = {
     //Template Engine NAVBAR
     var tplNavBar =  "{{ #navBar }}" +
                      "<li class='nav-item'>" +
-                     "<a class='nav-link' href='#' id='btnHome' onclick='{{ click }}'>{{ Item }}</a>" +
+                     "<a class='nav-link' href='#' id='{{id}}' onclick='{{ click }}'>{{ Item }}</a>" +
                      "</li>" +
                      "{{ /navBar }}";
     html = Mustache.render(tplNavBar, data);

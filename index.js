@@ -17,8 +17,15 @@ function home(){
 }
 
 async function homeSearch(){
-  let y = await search("","animeSearch");
-  createCardSearch(y,"searchContainer","Sua pesquisa");
+  console.log("teste");
+  console.log(document.getElementById("inputAnime").value.length);
+  if(document.getElementById("inputAnime").value.length <=2){
+    alert("insira pelo menos 3 caracteres!");
+  }
+  else{
+    let y = await search("","animeSearch");
+    createCardSearch(y,"searchContainer","Sua pesquisa");
+  }
 }
 
 //Criação da barra de pesquisa
@@ -47,18 +54,20 @@ function createSearchBar(id){
 
 //Trocando input de pesquisa de local
 function toggleSearchBar(obj){
-  console.log((document.getElementById("searchDefault").children.length));
-  if(document.getElementById("searchDefault").children.length >= 1){
-    console.log("if");
+  if(obj.id == 'btnHome'){
+    document.getElementById("searchNav").innerHTML = "";
+    document.getElementById("content").style.display="block";
+    if(!document.getElementById("searchDefault").children.length >=1){
+      createSearchBar("searchDefault");
+    }
+    document.getElementById("searchContainer").innerHTML="";
+  }
+
+  else if(document.getElementById("searchDefault").children.length >=1){
     document.getElementById("searchDefault").innerHTML = "";
     document.getElementById("content").style.display="none";
     createSearchBar("searchNav");
   }
-  else if(obj.id == 'btnHome'){
-    console.log("else");
-    document.getElementById("searchNav").innerHTML = "";
-    document.getElementById("content").style.display="block";
-    createSearchBar("searchDefault");
-    document.getElementById("searchContainer").innerHTML="";
-  }
+
+
 }
