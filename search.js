@@ -69,6 +69,17 @@ async function search(id, funcao){
       console.log(error)
     }
   }
+  else if(funcao == 'youtube'){
+
+    try{
+
+      searchYoutube();
+    }
+
+    catch(error){
+      console.log(error)
+    }
+  }
   else{
     console.error("Function isn't defined")
   }
@@ -110,4 +121,20 @@ function dayOfTheWeek(){
     }
   });
   return dayOfTheWeek;
+}
+
+function searchYoutube() {
+  console.log( $('#query').val());
+  var q = $('#query').val();
+  //var q = 'Jo Jo op 1';
+  var request = gapi.client.youtube.search.list({
+    q: q,
+    part: 'snippet'
+  });
+
+  request.execute(function(response) {
+    var str = JSON.stringify(response.result);
+    //console.log(response.result.items[0].id.videoId);
+
+  });
 }
