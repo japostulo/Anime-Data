@@ -1,4 +1,4 @@
-async function search(id, funcao){
+async function search(id, funcao, valor){
   var anime = document.getElementById("inputAnime").value;
 
   if(funcao == 'animeSearch'){
@@ -73,7 +73,8 @@ async function search(id, funcao){
 
     try{
 
-      searchYoutube();
+      searchYoutube(valor);
+
     }
 
     catch(error){
@@ -123,9 +124,10 @@ function dayOfTheWeek(){
   return dayOfTheWeek;
 }
 
-function searchYoutube() {
-  console.log( $('#query').val());
-  var q = $('#query').val();
+
+async function searchYoutube(valor) {
+  //console.log( $('#query').val());
+  var q = valor;
   //var q = 'Jo Jo op 1';
   var request = gapi.client.youtube.search.list({
     q: q,
@@ -133,8 +135,9 @@ function searchYoutube() {
   });
 
   request.execute(function(response) {
-    var str = JSON.stringify(response.result);
-    //console.log(response.result.items[0].id.videoId);
+    var str = JSON.stringify(response.result);'
+    var id = response.result.items[0].id.videoId;
+    loadVideo(id, response.result);
 
   });
 }
