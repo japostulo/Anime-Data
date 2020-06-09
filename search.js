@@ -124,6 +124,7 @@ function dayOfTheWeek(){
   return dayOfTheWeek;
 }
 
+
 async function searchYoutube(valor) {
   //console.log( $('#query').val());
   var q = valor;
@@ -134,8 +135,9 @@ async function searchYoutube(valor) {
   });
 
   request.execute(function(response) {
-    var str = JSON.stringify(response.result);
+    var str = JSON.stringify(response.result);'
     var id = response.result.items[0].id.videoId;
     loadVideo(id, response.result);
+
   });
 }
