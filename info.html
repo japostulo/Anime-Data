@@ -5,7 +5,6 @@
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script type="text/javascript" src="info.js"></script>
     <style media="screen">
       .infoLink:hover{
         cursor:pointer;
@@ -15,7 +14,7 @@
       }
     </style>
   </head>
-  <body>
+  <body onload="loadHome()">
     <div class="wrapper" style="background-color:#001829">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-light position-abolute d-absolute bg-light" id="navAnchor">
@@ -41,79 +40,62 @@
           <!--col video / col info  -->
           <div class="row">
             <!-- col video -->
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-8">
               <!-- linha de titulo / status -->
               <div class="row">
                 <div class="col">
-                  <h1 id="animeTitle">TITULO DO ANIME ID=animeTitle</h1>
+                  <h1 id="animeTitle"></h1>
                 </div>
               </div>
               <!-- linha com o vídeo container-->
               <div class="row">
                 <div class="col">
-                  <iframe id="YoutubeVideo" class="w-100" style="height:26rem" src="https://www.youtube.com/embed/omdfcGYEqPY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <div class="" id="colVideo">
+                    <iframe id="YoutubeVideo" class="w-100" style="height:26rem" src="https://www.youtube.com/embed/-G9BqkgZXRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+
                 </div>
               </div>
               <!-- linha com nome do vídeo -->
               <div class="row">
                 <div class="col">
-                  <h3 id="videoTitle">NOME DO VIDEO ID=videoTitle</h3>
+                  <h3 id="videoTitle"></h3>
                 </div>
               </div>
             </div>
 
             <!-- col info -->
-            <div class="col p-2 m-2 bg-warning">
+            <div class="col bg-danger p-2 m-2">
               <!-- linha com menu de info -->
-              <div class="row p-0 m-0 text-center">
-                <div class="col p-2 infoLink" style="background-color:#dc3545" id="btnInfo" onclick="loadInfo(this)">
+              <div class="row bg-light p-0 m-0 text-center">
+                <div class="col p-2 infoLink" id="btnInfo" onclick="loadInfo(this)">
                   INFOS
                 </div>
-                <div class="col p-2 infoLink" id="btnOpening" onclick="loadOpening(this)">
-                  Openings/Endings
+                <div class="col p-2 infoLink" style="background-color:#dc3545" id="btnOpening" onclick="loadOpening(this)">
+                  Openings
                 </div>
-
+                <div class="col p-2 infoLink" style="background-color:#dc3545" id="btnEnding" onclick="loadEnding(this)">
+                  Endings
+                </div>
               </div>
               <!-- linha com dados de acordo com a info -->
-              <div class="row m-0 p-0">
-                <div class="col bg-danger" id="info">
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
-                  Dados de informações
+              <div class="row bg-light m-0 p-0">
+                <div class="col" id="info">
+                  <ul class="">
+                    <h3>Sinopse</h3>
+                    <li id="synopsis"></li>
+                    <h3>Episódios</h3>
+                    <li id='episodes'></li>
+                  </ul>
                 </div>
-                <div class="col bg-danger d-none" id="opening">
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
-                  dados de opening
+                <div class="col d-none p-0 m-0" id="opening" >
+                  <table class="table table-bordered table-hover" id="openings">
+
+                  </table>
+                </div>
+                <div class="col d-none p-0 m-0" id="ending" >
+                  <table class="table table-bordered table-hover" id="endings">
+                  </table>
                 </div>
               </div>
             </div>
@@ -192,7 +174,12 @@
     </div>
 
     <script src="https://unpkg.com/mustache@latest"></script>
-    <script type="text/javascript" src="templateEngine.js"></script>
+    <script type="text/javascript" src="./templateEngine.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="./auth.js"></script>
+    <script src="./search.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+    <script type="text/javascript" src="./info.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
