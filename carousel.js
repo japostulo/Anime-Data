@@ -51,12 +51,19 @@ array.forEach((item,i) => {
 var card = document.createElement("div");
 card.setAttribute("class","item card d-inline-flex md-auto rounded shadow-lg border");
 card.setAttribute("style","width:13rem;height:18rem;z-index:1;");
-card.setAttribute("id",item.mal_id);
 
 var imageCard = document.createElement("img");
 imageCard.setAttribute("class","card-img-top");
 imageCard.setAttribute("src",item.image_url);
 imageCard.setAttribute("style","height:15rem");
+imageCard.setAttribute("onclick","releaseMal(this)");
+imageCard.setAttribute("target","_blank");
+imageCard.setAttribute("href","/info.html?mal="+item.mal_id);
+
+var linkImage = document.createElement("a");
+linkImage.setAttribute("id",item.mal_id);
+linkImage.setAttribute("target","_blank");
+linkImage.setAttribute("href","info.html");
 
   if(titleParameter=="Animes mais assistidos"){
     var rank = document.createElement("span");
@@ -101,7 +108,8 @@ rowTitle.append(colTitle);
 colTitle.append(titleCarousel);
 
 slider.append(card);
-card.append(imageCard);
+linkImage.append(imageCard);
+card.append(linkImage);
 card.append(cardBody);
 cardBody.append(title);
 
@@ -164,7 +172,9 @@ function tooltipCopy(a){
   $('.card-title').attr("title", "Copiar titulo").tooltip('_fixTitle');
 }
 
-function createCardSearch(array, idAppend, titleS){
+function setSearchArea(array, idAppend, titleS){
+
+  //limpando o conteúdo da pesquisa anterior
   document.getElementById(idAppend).innerHTML="";
 
 //CRIANDO O TÍTULO DO CONTAINER
@@ -179,60 +189,61 @@ function createCardSearch(array, idAppend, titleS){
   rowTitle.append(colTitle);
   document.getElementById(idAppend).append(rowTitle);
 
-//PEQUISA LIMITADA À 10 ITENS, CRIANDO DUAS LINHAS COM 5 CARD/5 COLS
-  var line1 = document.createElement("div");
-  line1.setAttribute("class","row mt-2 d-flex justify-content-center");
-  document.getElementById(idAppend).append(line1);
+  var cardContainer = document.createElement("div");
+  cardContainer.setAttribute("class","row mt-2 d-flex justify-content-center");
+  cardContainer.setAttribute("id","cardAppend");
+  document.getElementById(idAppend).append(cardContainer);
 
-  var line2 = document.createElement("div");
-  line2.setAttribute("class","row mt-4 d-flex justify-content-center");
-  document.getElementById(idAppend).append(line2);
+  //criando o contúdo da pesquisa atual
+  createCard(array.splice(0,10));
+}
 
-  array.forEach((item,i) => {
-  var card = document.createElement("div");
-  card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
-  card.setAttribute("style","width:13rem;height:18rem;z-index:1;");
-  card.setAttribute("id",item.mal_id);
+function createCard(array){
+    array.forEach((item,i) => {
+    var card = document.createElement("div");
+    card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
+    card.setAttribute("style","width:13rem;height:18rem;");
 
-  var imageCard = document.createElement("img");
-  imageCard.setAttribute("class","card-img-top");
-  imageCard.setAttribute("src",item.image_url);
-  imageCard.setAttribute("style","height:15rem");
+    var imageCard = document.createElement("img");
+    imageCard.setAttribute("class","card-img-top");
+    imageCard.setAttribute("src",item.image_url);
+    imageCard.setAttribute("style","height:13rem");
 
-  var cardBody = document.createElement("div");
-  cardBody.setAttribute("class","card-body d-flex align-items-center justify-content-center p-0");
-  cardBody.setAttribute("style","");
+    var linkImage = document.createElement("a");
+    linkImage.setAttribute("id",item.mal_id);
+    linkImage.setAttribute("target","_blank");
+    linkImage.setAttribute("href","info.html");
 
-  var title = document.createElement("p");
-  title.setAttribute("class","card-title mt-2 text-center m-0");
-  title.setAttribute("data-toggle","tooltip");
-  title.setAttribute("data-placement","bottom");
-  title.setAttribute("data-original-title","Copiar Titulo");
-  title.setAttribute("onclick","tooltipCopy(this)");
-  title.setAttribute("id","t"+item.mal_id);
-  title.setAttribute("data-clipboard-text",item.title);
-  title.innerHTML=item.title;
-  new ClipboardJS('#t'+item.mal_id);
-  //FIM CRIANDO CARD
+    var cardBody = document.createElement("div");
+    cardBody.setAttribute("class","card-body p-0");
+    cardBody.setAttribute("style","");
 
-  if(item.score !=null){
-    var badge = document.createElement("span");
-    badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
-    badge.innerHTML="Score: "+item.score;
-    card.append(badge);
-  }
 
-  card.append(imageCard);
-  card.append(cardBody);
-  cardBody.append(title);
+    var title = document.createElement("p");
+    title.setAttribute("class","card-title mt-2 text-center m-0");
+    title.setAttribute("data-toggle","tooltip");
+    title.setAttribute("style","text-overflow:ellipsis;overflow:hidden;white-space:nowrap");
+    title.setAttribute("data-placement","bottom");
+    title.setAttribute("data-original-title","Copiar Titulo");
+    title.setAttribute("onclick","tooltipCopy(this)");
+    title.setAttribute("id","t"+item.mal_id);
+    title.setAttribute("data-clipboard-text",item.title);
+    title.innerHTML=item.title;
+    new ClipboardJS('#t'+item.mal_id);
 
-  if(i<5){
-    line1.append(card);
-  }else{
-    if(i>=5){
-      line2.append(card);
+    //FIM CRIANDO CARD
+
+    if(item.score !=null){
+      var badge = document.createElement("span");
+      badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
+      badge.innerHTML="Score: "+item.score;
+      card.append(badge);
     }
-  }
-  });
 
+    linkImage.append(imageCard);
+    cardBody.append(title);
+    card.append(linkImage);
+    card.append(cardBody);
+    document.getElementById("cardAppend").append(card)
+  });
 }
