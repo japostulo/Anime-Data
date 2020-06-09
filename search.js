@@ -1,9 +1,10 @@
-async function search(id, funcao){
+async function search(id, funcao, valor){
   var anime = document.getElementById("inputAnime").value;
-  toggleSearchBar();
-  
+
   if(funcao == 'animeSearch'){
+
     try{
+      toggleSearchBar("");
       data = await connectionApi(animeSearch(anime));
       return data.data.results;
     }
@@ -68,6 +69,18 @@ async function search(id, funcao){
       console.log(error)
     }
   }
+  else if(funcao == 'youtube'){
+
+    try{
+
+      searchYoutube(valor);
+
+    }
+
+    catch(error){
+      console.log(error)
+    }
+  }
   else{
     console.error("Function isn't defined")
   }
@@ -109,4 +122,20 @@ function dayOfTheWeek(){
     }
   });
   return dayOfTheWeek;
+}
+
+async function searchYoutube(valor) {
+  //console.log( $('#query').val());
+  var q = valor;
+  //var q = 'Jo Jo op 1';
+  var request = gapi.client.youtube.search.list({
+    q: q,
+    part: 'snippet'
+  });
+
+  request.execute(function(response) {
+    var str = JSON.stringify(response.result);
+    var id = response.result.items[0].id.videoId;
+    loadVideo(id, response.result);
+  });
 }
