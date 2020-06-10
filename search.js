@@ -1,12 +1,9 @@
-let inputAnime = document.getElementById("inputAnime").value;
 
 anime = {
   'search': async () => {
     try{
+      let data = await connectionApi(animeSearch());
       toggleSearchBar("");
-      console.log(inputAnime);
-      let data = await connectionApi(animeSearch(inputAnime));
-      console.log(data.data.results);
       return data.data.results;
     }
     catch(error){
@@ -57,8 +54,9 @@ anime = {
   },
 }
 
-function animeSearch(anime){
-  return `https://api.jikan.moe/v3/search/anime?q=${anime}`;
+function animeSearch(){
+   let a = document.getElementById("inputAnime").value;
+  return `https://api.jikan.moe/v3/search/anime?q=${a}`;
 }
 
 function animeTop(){
