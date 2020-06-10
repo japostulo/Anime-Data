@@ -148,7 +148,7 @@ function att(){
   if(document.getElementById("cardAppend")){
 
     if(document.documentElement.scrollTop > sco){
-      
+
       if(arrayScroll.length == 0){
         console.log("ACABOU KRL");
       }else{
@@ -177,6 +177,7 @@ function createCard(array,ranker){
     linkImage.setAttribute("id",item.mal_id);
     linkImage.setAttribute("target","_blank");
     linkImage.setAttribute("href","info.html");
+    linkImage.setAttribute("onclick","releaseMal(this)");
 
     if(ranker){
       var rank = document.createElement("span");
