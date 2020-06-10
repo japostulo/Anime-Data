@@ -73,3 +73,7 @@ function toggleSearchBar(obj){
 
 
 }
+
+function releaseMal(obj){
+  localStorage.mal_id = obj.id;
+}
