@@ -1,8 +1,6 @@
-
-
-
 var idCarousel = 0;
 
+var arrayScroll=[];
 //CRIANDO UM CAROUSEL PASSANDO UM ARRAY (NORMALMENTE PASSANDO UM ARRAY TRABALHADO).
 function createCarousel(array,idAppend,titleParameter){
   //DEFINE SE VAI TER BADGE TRIANGULAR COM RANK OU NÃO, DEFAULT = FALSE;
@@ -141,11 +139,28 @@ function setSearchArea(array, idAppend, titleS){
   createCard(array.splice(0,10),false).forEach((card, i) => {
     document.getElementById("cardAppend").append(card);
   });
-  // localStorage.setItem("array",JSON.stringify(array));
+
+  arrayScroll=array;
 
 }
+var sco = 60;
+function att(){
+  if(document.getElementById("cardAppend")){
 
+    if(document.documentElement.scrollTop > sco){
+      
+      if(arrayScroll.length == 0){
+        console.log("ACABOU KRL");
+      }else{
+        alert("Cards inseridos");
+        createCard(arrayScroll.splice(0,10),false).forEach((card,i) => {document.getElementById("cardAppend").append(card)});
+        sco = document.getElementById("cardAppend").clientHeight - window.innerHeight;
+      }
+    }
+  }
+}
 function createCard(array,ranker){
+  console.log(array);
     var cards=[];
     let cont =0;
     array.forEach((item,i) => {
