@@ -1,89 +1,60 @@
-async function search(id, funcao, valor){
-  var anime = document.getElementById("inputAnime").value;
+let inputAnime = document.getElementById("inputAnime").value;
 
-  if(funcao == 'animeSearch'){
-
+anime = {
+  'search': async () => {
     try{
       toggleSearchBar("");
-      data = await connectionApi(animeSearch(anime));
+      console.log(inputAnime);
+      let data = await connectionApi(animeSearch(inputAnime));
+      console.log(data.data.results);
       return data.data.results;
     }
-
     catch(error){
       console.log(error)
     }
-  }
-
-  else if(funcao == 'animeTop'){
+  },
+  'top': async () => {
     try{
-    data = await connectionApi(animeTop());
-    return data.data.top;
+      let data = await connectionApi(animeTop());
+      return data.data.top;
     }
-
     catch(error){
       console.log(error)
     }
-
-  }
-
-  else if(funcao == 'animeWeek'){
+  },
+  'week': async () => {
     try{
-    let week = dayOfTheWeek();
-    week = week.toLowerCase();
-    data = await connectionApi(animeWeek(dayOfTheWeek()));
-    return data.data[week];
+      let week = dayOfTheWeek();
+      week = week.toLowerCase();
+      let data = await connectionApi(animeWeek(dayOfTheWeek()));
+      return data.data[week];
     }
-
     catch(error){
-
+      console.log(error);
     }
-  }
-
-  else if(funcao == 'animeGender'){
+  },
+  'data': async (id) => {
     try{
-      let config = {
-        crossdomain: true,
-        headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        }
-
-      };
-
-    data = await connectionApi(animeGender(), config);
-    console.log("Teste", data);
+      let data = await connectionApi(animeData(id));
+      console.log(data.data);
+      return data.data;
+    }
+    catch(error){
+      console.log(error)
+    }
+  },
+  'gender': async () => {
+    try{
+    let config = {
+      mode : 'no-cors'
+    };
+    let data = await connectionApi(animeGender(), config);
     return data.data;
     }
-
     catch(error){
       console.log(error)
     }
-  }
-  else if(funcao == 'animeData'){
-    try{
-    data = await connectionApi(animeData(id));
-    return data.data;
-    }
-
-    catch(error){
-      console.log(error)
-    }
-  }
-  else if(funcao == 'youtube'){
-
-    try{
-
-      searchYoutube(valor);
-
-    }
-
-    catch(error){
-      console.log(error)
-    }
-  }
-  else{
-    console.error("Function isn't defined")
-  }
+  },
 }
 
 function animeSearch(anime){
@@ -106,7 +77,6 @@ function animeData(mal_id){
   return `https://api.jikan.moe/v3/anime/${mal_id}`;
 }
 
-
 async function connectionApi(animeQuery, config ={}){
     return axios.get(animeQuery, config);
 }
@@ -124,20 +94,15 @@ function dayOfTheWeek(){
   return dayOfTheWeek;
 }
 
-
 async function searchYoutube(valor) {
-  //console.log( $('#query').val());
   var q = valor;
-  //var q = 'Jo Jo op 1';
   var request = gapi.client.youtube.search.list({
     q: q,
     part: 'snippet'
   });
-
   request.execute(function(response) {
-    var str = JSON.stringify(response.result);'
+    var str = JSON.stringify(response.result);
     var id = response.result.items[0].id.videoId;
     loadVideo(id, response.result);
-
   });
 }
