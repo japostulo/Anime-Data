@@ -58,7 +58,7 @@ anime = {
 }
 
 function animeSearch(anime){
-  return `https://api.jikan.moe/v3/search/anime?q=${anime}&limit=10`;
+  return `https://api.jikan.moe/v3/search/anime?q=${anime}`;
 }
 
 function animeTop(){
