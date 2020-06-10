@@ -225,4 +225,5 @@ function createCard(array,ranker){
     cards[i] = card;
   });
   return cards;
+  
 }
