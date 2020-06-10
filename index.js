@@ -1,10 +1,10 @@
 async function loadHome(){
 
 
-  let x = await search("","animeWeek");
+  let x = await anime.week();
   createCarousel(x,"carouselContainer","Animes da semana");
 
-  let y = await search("","animeTop");
+  let y = await anime.top();
   createCarousel(y,"carouselContainer","Animes mais assistidos");
 
 }
@@ -17,14 +17,13 @@ function home(){
 }
 
 async function homeSearch(){
-  console.log("teste");
-  console.log(document.getElementById("inputAnime").value.length);
+
   if(document.getElementById("inputAnime").value.length <=2){
     alert("insira pelo menos 3 caracteres!");
   }
   else{
-    let y = await search("","animeSearch");
-    createCardSearch(y,"searchContainer","Sua pesquisa");
+    let y = await anime.search();
+    setSearchArea(y,"searchContainer","Sua pesquisa");
   }
 }
 
