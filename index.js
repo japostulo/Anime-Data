@@ -4,8 +4,11 @@ async function loadHome(){
   let x = await anime.week();
   createCarousel(x,"carouselContainer","Animes da semana");
 
-  let y = await anime.top();
-  createCarousel(y,"carouselContainer","Animes mais assistidos");
+  setTimeout(async () => {
+    let y = await anime.top();
+    createCarousel(y,"carouselContainer","Animes mais assistidos");
+  }, 4000);
+
 
 }
 
