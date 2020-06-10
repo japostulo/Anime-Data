@@ -1,14 +1,18 @@
 
+
+
+var idCarousel = 0;
+
 //CRIANDO UM CAROUSEL PASSANDO UM ARRAY (NORMALMENTE PASSANDO UM ARRAY TRABALHADO).
-var qtdCarousel = 0;
 function createCarousel(array,idAppend,titleParameter){
-  console.log("entrou");
+  //DEFINE SE VAI TER BADGE TRIANGULAR COM RANK OU NÃO, DEFAULT = FALSE;
+  var ranker=false;
   //FUNÇÃO DE INICIALIZAÇÃO DO TOOLTIP
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   });
+idCarousel+=1;
 
-qtdCarousel+=1;
 //CRIANDO O TITULO DO CAROUSEL
 var rowTitle = document.createElement("div");
 rowTitle.setAttribute("class","row");
@@ -21,103 +25,45 @@ titleCarousel.innerHTML=titleParameter;
 
 //CRIANDO O CAROUSEL
 var slider = document.createElement("div");
-slider.setAttribute("class","carousel"+qtdCarousel+" owl-carousel owl-theme text-center");
+slider.setAttribute("class","carousel"+idCarousel+" owl-carousel owl-theme text-center");
 
 //CRIAÇÃO DOS BOTÕES DO CAROUSEL
 var divNext = document.createElement("div");
-divNext.setAttribute("class","btnCarousel position-absolute d-flex align-items-center h-100");
-divNext.setAttribute("style","right:0;top:0;");
-divNext.setAttribute("id",'Next'+qtdCarousel);
-divNext.setAttribute("onclick","next()");
+divNext.setAttribute("class","btnCarousel position-absolute d-flex align-items-center mt-4");
+divNext.setAttribute("style","right:0;top:0;height:16rem");
+divNext.setAttribute("id",'Next'+idCarousel);
 
 iconNext = document.createElement("span");
-iconNext.setAttribute("class","fa fa-3x fa-arrow-circle-right p-2");
+iconNext.setAttribute("class","fa fa-3x fa-arrow-circle-right p-1");
 iconNext.setAttribute("style","opacity: 0.8;");
 divNext.append(iconNext);
 
 var divPrev = document.createElement("div");
-divPrev.setAttribute("class","btnCarousel position-absolute d-flex align-items-center h-100");
-divPrev.setAttribute("style","left:0;top:0");
-divPrev.setAttribute("id",'Prev'+qtdCarousel);
+divPrev.setAttribute("class","btnCarousel position-absolute d-flex align-items-center mt-4");
+divPrev.setAttribute("style","left:0;top:0;height:16rem;");
+divPrev.setAttribute("id",'Prev'+idCarousel);
 
 iconPrev = document.createElement("span");
-iconPrev.setAttribute("class","fa fa-3x fa-arrow-circle-left p-2");
+iconPrev.setAttribute("class","fa fa-3x fa-arrow-circle-left p-1");
 iconPrev.setAttribute("style","opacity: 0.8;");
 divPrev.append(iconPrev);
 //FIM DA CRIAÇÃO DOS BOTÕES
 
-//CRIANDO OS CARDS
-array.forEach((item,i) => {
-var card = document.createElement("div");
-card.setAttribute("class","item card d-inline-flex md-auto rounded shadow-lg border");
-card.setAttribute("style","width:13rem;height:18rem;z-index:1;");
-
-var imageCard = document.createElement("img");
-imageCard.setAttribute("class","card-img-top");
-imageCard.setAttribute("src",item.image_url);
-imageCard.setAttribute("style","height:15rem");
-imageCard.setAttribute("onclick","releaseMal(this)");
-imageCard.setAttribute("target","_blank");
-imageCard.setAttribute("href","/info.html?mal="+item.mal_id);
-
-var linkImage = document.createElement("a");
-linkImage.setAttribute("id",item.mal_id);
-linkImage.setAttribute("target","_blank");
-linkImage.setAttribute("href","info.html");
-
-  if(titleParameter=="Animes mais assistidos"){
-    var rank = document.createElement("span");
-    rank.setAttribute("class","position-absolute");
-    // rank.setAttribute("style","right:10px;top:-5px;border-radius:0 0px 20px 20px"); style de cartão
-    rank.setAttribute("style","right:0px;top:0px; width: 0;height: 0;border-top: 30px solid #007bff;border-right: 30px solid #007bff;border-bottom:30px solid transparent;border-left: 30px solid transparent;");
-    card.append(rank);
-
-    var numberRANK = document.createElement("span");
-    numberRANK.setAttribute("class","position-absolute text-white h1");
-    numberRANK.setAttribute("style","right:5px;top:-10px;font-family: 'Tangerine', serif;");
-    numberRANK.innerHTML=(i+1);
-    card.append(numberRANK);
-  }
-
-var cardBody = document.createElement("div");
-cardBody.setAttribute("class","card-body d-flex align-items-center justify-content-center p-0");
-cardBody.setAttribute("style","");
-
-var title = document.createElement("p");
-title.setAttribute("class","card-title mt-2 text-center m-0");
-title.setAttribute("data-toggle","tooltip");
-title.setAttribute("data-placement","top");
-title.setAttribute("data-original-title","Copiar Titulo");
-title.setAttribute("onclick","tooltipCopy(this)");
-title.setAttribute("id","t"+item.mal_id);
-title.setAttribute("data-clipboard-text",item.title);
-title.innerHTML=item.title;
-new ClipboardJS('#t'+item.mal_id);
-//FIM CRIANDO CARD
-
-if(item.score !=null){
-  if(titleParameter!="Animes mais assistidos"){
-    var badge = document.createElement("span");
-    badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
-    badge.innerHTML="Score: "+item.score;
-    card.append(badge);
-  }
+if(titleParameter=="Animes mais assistidos"){
+  ranker=true;
 }
+// Para cada card criado, dar um append na div do carousel
+createCard(array,ranker).forEach((card, i) => {
+  slider.append(card);
+});
+
 //dando append titulo > col > rol.
 rowTitle.append(colTitle);
 colTitle.append(titleCarousel);
 
-slider.append(card);
-linkImage.append(imageCard);
-card.append(linkImage);
-card.append(cardBody);
-cardBody.append(title);
-
-});
 document.getElementById(idAppend).append(rowTitle);
 document.getElementById(idAppend).append(slider);
- var owl = $('.carousel'+qtdCarousel);
- console.log(owl);
+ var owl = $('.carousel'+idCarousel);
  owl.owlCarousel({
     loop:true,
     items:7,
@@ -155,25 +101,22 @@ document.getElementById(idAppend).append(slider);
 
   slider.append(divPrev);
   slider.append(divNext);
-  $('#Next'+qtdCarousel).click(function() {
+  $('#Next'+idCarousel).click(function() {
       owl.trigger('next.owl.carousel');
   });
-  $('#Prev'+qtdCarousel).click(function() {
-    console.log(owl.trigger('prev.owl.carousel'));
+  $('#Prev'+idCarousel).click(function() {
       owl.trigger('prev.owl.carousel');
   });
 }
 
 function tooltipCopy(a){
-  console.log(a.id);
   // $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle').tooltip('show').attr("title", "Copiar titulo").tooltip('_fixTitle');
   $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle');
   $('#'+a.id).tooltip('show');
-  $('.card-title').attr("title", "Copiar titulo").tooltip('_fixTitle');
+  $('.card-title').attr("title", "Clique para copiar o título").tooltip('_fixTitle');
 }
 
 function setSearchArea(array, idAppend, titleS){
-
   //limpando o conteúdo da pesquisa anterior
   document.getElementById(idAppend).innerHTML="";
 
@@ -194,15 +137,21 @@ function setSearchArea(array, idAppend, titleS){
   cardContainer.setAttribute("id","cardAppend");
   document.getElementById(idAppend).append(cardContainer);
 
-  //criando o contúdo da pesquisa atual
-  createCard(array.splice(0,10));
+  // Para cada card criado, dar um append na div da pesquisa
+  createCard(array.splice(0,10),false).forEach((card, i) => {
+    document.getElementById("cardAppend").append(card);
+  });
+  // localStorage.setItem("array",JSON.stringify(array));
+
 }
 
-function createCard(array){
+function createCard(array,ranker){
+    var cards=[];
+    let cont =0;
     array.forEach((item,i) => {
     var card = document.createElement("div");
     card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
-    card.setAttribute("style","width:13rem;height:18rem;");
+    card.setAttribute("style","width:13rem;height:16rem;");
 
     var imageCard = document.createElement("img");
     imageCard.setAttribute("class","card-img-top");
@@ -214,6 +163,19 @@ function createCard(array){
     linkImage.setAttribute("target","_blank");
     linkImage.setAttribute("href","info.html");
 
+    if(ranker){
+      var rank = document.createElement("span");
+      rank.setAttribute("class","position-absolute");
+      // rank.setAttribute("style","right:10px;top:-5px;border-radius:0 0px 20px 20px"); style de cartão
+      rank.setAttribute("style","right:0px;top:0px; width: 0;height: 0;border-top: 30px solid #007bff;border-right: 30px solid #007bff;border-bottom:30px solid transparent;border-left: 30px solid transparent;");
+      card.append(rank);
+
+      var numberRANK = document.createElement("span");
+      numberRANK.setAttribute("class","position-absolute text-white h1");
+      numberRANK.setAttribute("style","right:5px;top:-10px;font-family: 'Tangerine', serif;");
+      numberRANK.innerHTML=(i+1);
+      card.append(numberRANK);
+    }
     var cardBody = document.createElement("div");
     cardBody.setAttribute("class","card-body p-0");
     cardBody.setAttribute("style","");
@@ -224,26 +186,27 @@ function createCard(array){
     title.setAttribute("data-toggle","tooltip");
     title.setAttribute("style","text-overflow:ellipsis;overflow:hidden;white-space:nowrap");
     title.setAttribute("data-placement","bottom");
-    title.setAttribute("data-original-title","Copiar Titulo");
+    title.setAttribute("data-original-title","Clique para copiar o título");
     title.setAttribute("onclick","tooltipCopy(this)");
     title.setAttribute("id","t"+item.mal_id);
     title.setAttribute("data-clipboard-text",item.title);
     title.innerHTML=item.title;
     new ClipboardJS('#t'+item.mal_id);
 
-    //FIM CRIANDO CARD
-
     if(item.score !=null){
-      var badge = document.createElement("span");
-      badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
-      badge.innerHTML="Score: "+item.score;
-      card.append(badge);
+      if(!ranker){
+        var badge = document.createElement("span");
+        badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
+        badge.innerHTML="Score: "+item.score;
+        card.append(badge);
+      }
     }
 
     linkImage.append(imageCard);
     cardBody.append(title);
     card.append(linkImage);
     card.append(cardBody);
-    document.getElementById("cardAppend").append(card)
+    cards[i] = card;
   });
+  return cards;
 }
