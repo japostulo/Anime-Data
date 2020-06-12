@@ -1,10 +1,12 @@
 var idCarousel = 0;
+localStorage.sco = 10;
+//DEFINE SE VAI TER BADGE TRIANGULAR COM RANK OU NÃO, DEFAULT = FALSE;
+var ranker=false;
 
 var arrayScroll=[];
 //CRIANDO UM CAROUSEL PASSANDO UM ARRAY (NORMALMENTE PASSANDO UM ARRAY TRABALHADO).
 function createCarousel(array,idAppend,titleParameter){
-  //DEFINE SE VAI TER BADGE TRIANGULAR COM RANK OU NÃO, DEFAULT = FALSE;
-  var ranker=false;
+  document.getElementById(idAppend).innerHTML="";
   //FUNÇÃO DE INICIALIZAÇÃO DO TOOLTIP
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -16,11 +18,16 @@ var rowTitle = document.createElement("div");
 rowTitle.setAttribute("class","row");
 var colTitle = document.createElement("div");
 colTitle.setAttribute("class","col");
+colTitle.setAttribute("id","title"+idCarousel);
 var titleCarousel = document.createElement("h3");
 titleCarousel.setAttribute("class","p-0 mb-0");
 titleCarousel.setAttribute("style","color:#001829;");
 titleCarousel.innerHTML=titleParameter;
+// dando append titulo > col > rol.
+rowTitle.append(colTitle);
+colTitle.append(titleCarousel);
 
+document.getElementById(idAppend).append(colTitle);
 //CRIANDO O CAROUSEL
 var slider = document.createElement("div");
 slider.setAttribute("class","carousel"+idCarousel+" owl-carousel owl-theme text-center");
@@ -50,17 +57,14 @@ divPrev.append(iconPrev);
 if(titleParameter=="Animes mais assistidos"){
   ranker=true;
 }
-// Para cada card criado, dar um append na div do carousel
-createCard(array,ranker).forEach((card, i) => {
-  slider.append(card);
-});
 
-//dando append titulo > col > rol.
-rowTitle.append(colTitle);
-colTitle.append(titleCarousel);
+document.getElementById("title"+idCarousel).append(slider);
 
-document.getElementById(idAppend).append(rowTitle);
-document.getElementById(idAppend).append(slider);
+  // Para cada card criado, dar um append na div do carousel
+  createCard(array,ranker).forEach((card, i) => {
+    slider.append(card);
+  });
+
  var owl = $('.carousel'+idCarousel);
  owl.owlCarousel({
     loop:true,
@@ -143,7 +147,6 @@ function setSearchArea(array, idAppend, titleS){
   arrayScroll=array;
 
 }
-localStorage.sco = 60;
 function att(){
   if(document.getElementById("cardAppend")){
 
@@ -169,16 +172,30 @@ function createCard(array,ranker){
     card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
     card.setAttribute("style","width:13rem;height:16rem;");
 
-    var imageCard = document.createElement("img");
-    imageCard.setAttribute("class","card-img-top");
-    imageCard.setAttribute("src",item.image_url);
-    imageCard.setAttribute("style","height:13rem");
+    if(item.title=="Carregando..."){
+      var divLoader = document.createElement("div");
+      divLoader.setAttribute("class","card-img-top d-flex align-items-center");
+      divLoader.setAttribute("style","height:13rem");
 
-    var linkImage = document.createElement("a");
-    linkImage.setAttribute("id",item.mal_id);
-    linkImage.setAttribute("target","_blank");
-    linkImage.setAttribute("href","info.html");
-    linkImage.setAttribute("onclick","releaseMal(this)");
+      var loader = document.createElement("div");
+      loader.setAttribute("class","loader");
+      divLoader.append(loader);
+      card.append(divLoader);
+    }else{
+      var imageCard = document.createElement("img");
+      imageCard.setAttribute("class","card-img-top");
+      imageCard.setAttribute("src",item.image_url);
+      imageCard.setAttribute("style","height:13rem");
+
+      var linkImage = document.createElement("a");
+      linkImage.setAttribute("id",item.mal_id);
+      linkImage.setAttribute("target","_blank");
+      linkImage.setAttribute("href","info.html");
+      linkImage.setAttribute("onclick","releaseMal(this)");
+      linkImage.append(imageCard);
+      card.append(linkImage);
+
+    }
 
     if(ranker){
       var rank = document.createElement("span");
@@ -193,6 +210,17 @@ function createCard(array,ranker){
       numberRANK.innerHTML=(i+1);
       card.append(numberRANK);
     }
+
+    if(item.score !=null){
+      if(!ranker){
+        var badge = document.createElement("span");
+        badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
+        badge.innerHTML="Score: "+item.score;
+        card.append(badge);
+      }
+    }
+
+
     var cardBody = document.createElement("div");
     cardBody.setAttribute("class","card-body p-0");
     cardBody.setAttribute("style","");
@@ -210,20 +238,21 @@ function createCard(array,ranker){
     title.innerHTML=item.title;
     new ClipboardJS('#t'+item.mal_id);
 
-    if(item.score !=null){
-      if(!ranker){
-        var badge = document.createElement("span");
-        badge.setAttribute("class","badge badge-primary position-absolute p-1 rounded");
-        badge.innerHTML="Score: "+item.score;
-        card.append(badge);
-      }
-    }
-
-    linkImage.append(imageCard);
     cardBody.append(title);
-    card.append(linkImage);
     card.append(cardBody);
     cards[i] = card;
   });
   return cards;
+}
+function LoaderCarousel(id){
+  var container = document.createElement("div");
+  container.setAttribute("class","row");
+  container.setAttribute("id",id);
+
+  arrayLoader = [{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},];
+  createCard(arrayLoader,ranker).forEach((card, i) => {
+    container.append(card);
+  });
+  document.getElementById("searchContainer").append(container);
+
 }
