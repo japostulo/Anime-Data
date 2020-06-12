@@ -57,6 +57,7 @@ function createSearchBar(id){
 //Trocando input de pesquisa de local
 function toggleSearchBar(obj){
   if(obj.id == 'btnHome'){
+    localStorage.sco = 60;
     document.getElementById("searchNav").innerHTML = "";
     document.getElementById("content").style.display="block";
     if(!document.getElementById("searchDefault").children.length >=1){
