@@ -1,9 +1,12 @@
+//ID ÚNICO PARA CADA CAROUSEL, USADO PARA A INTERATIVIDADE DOS BOTÕES DE NEXT E PREV.
 var idCarousel = 0;
+//DEFINE O SCROLL MÍNIMO PARA ATUALIZAR A PESQUISA COM NOVOS CARDS
 localStorage.sco = 10;
 //DEFINE SE VAI TER BADGE TRIANGULAR COM RANK OU NÃO, DEFAULT = FALSE;
 var ranker=false;
+//ARRAY COM O RESTO DA PESQUISA DO ARRAY ORIGINAL PARA DAR SCROLL INFINITO
+var arrayScroll = [];
 
-var arrayScroll=[];
 //CRIANDO UM CAROUSEL PASSANDO UM ARRAY (NORMALMENTE PASSANDO UM ARRAY TRABALHADO).
 function createCarousel(array,idAppend,titleParameter){
   document.getElementById(idAppend).innerHTML="";
@@ -34,7 +37,7 @@ slider.setAttribute("class","carousel"+idCarousel+" owl-carousel owl-theme text-
 
 //CRIAÇÃO DOS BOTÕES DO CAROUSEL
 var divNext = document.createElement("div");
-divNext.setAttribute("class","btnCarousel position-absolute d-flex align-items-center mt-4");
+divNext.setAttribute("class","btnCarousel next position-absolute d-flex align-items-center mt-4");
 divNext.setAttribute("style","right:0;top:0;height:16rem");
 divNext.setAttribute("id",'Next'+idCarousel);
 
@@ -44,7 +47,7 @@ iconNext.setAttribute("style","opacity: 0.8;");
 divNext.append(iconNext);
 
 var divPrev = document.createElement("div");
-divPrev.setAttribute("class","btnCarousel position-absolute d-flex align-items-center mt-4");
+divPrev.setAttribute("class","btnCarousel prev position-absolute d-flex align-items-center mt-4");
 divPrev.setAttribute("style","left:0;top:0;height:16rem;");
 divPrev.setAttribute("id",'Prev'+idCarousel);
 
@@ -111,18 +114,20 @@ document.getElementById("title"+idCarousel).append(slider);
   });
 }
 
-function tooltipCopy(a){
-  // $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle').tooltip('show').attr("title", "Copiar titulo").tooltip('_fixTitle');
+//FUNÇÃO PARA MÚDAR O TÍTULO DO TOOLTIP PARA "COPIADO" QUANDO CLICAR ENCIMA
+function tooltipCopy(component){
+  //CRIA UM NOVO TÍTULO COM "COPIADO", MOSTRA ESSE TÍTULO E ALTERA DE VOLTA PARA O TÍTULO ORIGINAL.
   $('.card-title').attr("title", "Copiado!").tooltip('_fixTitle');
-  $('#'+a.id).tooltip('show');
+  $('#'+component.id).tooltip('show');
   $('.card-title').attr("title", "Clique para copiar o título").tooltip('_fixTitle');
 }
 
+//FUNÇÃO PARA A CRIAÇÃO DA ÁREA DE PESQUISA COM OS CARDS.
 function setSearchArea(array, idAppend, titleS){
   //limpando o conteúdo da pesquisa anterior
   document.getElementById(idAppend).innerHTML="";
 
-//CRIANDO O TÍTULO DO CONTAINER
+//CRIANDO O CONTAINER DOS CARDS E TÍTULO
   var rowTitle = document.createElement("div");
   rowTitle.setAttribute("class","row");
   var colTitle = document.createElement("div");
@@ -138,20 +143,27 @@ function setSearchArea(array, idAppend, titleS){
   cardContainer.setAttribute("class","row mt-2 d-flex justify-content-center");
   cardContainer.setAttribute("id","cardAppend");
   document.getElementById(idAppend).append(cardContainer);
+  //FIM DA CRIAÇÃO DO CONTAINER/TITULO
 
-  // Para cada card criado, dar um append na div da pesquisa
+  // Para cada card criado a partir do array, dar um append na div da pesquisa
   createCard(array.splice(0,10),false).forEach((card, i) => {
     document.getElementById("cardAppend").append(card);
   });
 
+  //após usar o método splice (recortar elementos do array, foi atribuido a variavel arrayScroll o resto do array da pesquisa para usar no scroll
   arrayScroll=array;
 
 }
+
+//FUNÇÃO DO "SCROLL INFINITO"
 function att(){
+  //SE EXISTIR A DIV CARDAPPEND (DIV ONDE FICA O RESULTADO DA PESQUISA)
   if(document.getElementById("cardAppend")){
 
+    //SE O SCROLL ROLADO FOI MAIOR QUE O MÍNIMO DETERMINADO NA VÁRIAVEL SCO.
     if(document.documentElement.scrollTop > localStorage.sco){
 
+      //SE O ARRAY ESTIVER VAZIO / SE NÃO CRIAR 10 NOVOS CARDS COM O RESTO DA PESQUISA
       if(arrayScroll.length == 0){
         console.log("ACABOU KRL");
       }else{
@@ -163,6 +175,7 @@ function att(){
   }
 }
 
+//FUNÇÃO PARA A CRIAÇÃO DE CARDS PASSANDO COMO PARÂMETRO O ARRAY COM AS INFORMAÇÕES
 function createCard(array,ranker){
   console.log(array);
     var cards=[];
@@ -172,6 +185,7 @@ function createCard(array,ranker){
     card.setAttribute("class","item card d-inline-flex m-2 rounded shadow-lg border");
     card.setAttribute("style","width:13rem;height:16rem;");
 
+    //******CONDIÇÕES DO CARDS*******
     if(item.title=="Carregando..."){
       var divLoader = document.createElement("div");
       divLoader.setAttribute("class","card-img-top d-flex align-items-center");
@@ -219,7 +233,7 @@ function createCard(array,ranker){
         card.append(badge);
       }
     }
-
+    //******FIM DAS CONDIÇÕES DO CARDS*******
 
     var cardBody = document.createElement("div");
     cardBody.setAttribute("class","card-body p-0");
@@ -236,23 +250,29 @@ function createCard(array,ranker){
     title.setAttribute("id","t"+item.mal_id);
     title.setAttribute("data-clipboard-text",item.title);
     title.innerHTML=item.title;
+
+    //ADICIONANDO A FUNÇÃO DE COPIAR NO TÍTULO AO CLICAR
     new ClipboardJS('#t'+item.mal_id);
 
     cardBody.append(title);
     card.append(cardBody);
     cards[i] = card;
   });
+
+  //RETORNO COM O HTML DE TODOS OS CARDS CRIADOS DENTRO DO FOREACH DO ARRAY DE INFORMAÇÕES
   return cards;
 }
+
+//FUNÇÃO PARA CRIAR O LOADER DO CAROUSEL
 function LoaderCarousel(id){
   var container = document.createElement("div");
   container.setAttribute("class","row");
   container.setAttribute("id",id);
 
-  arrayLoader = [{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},];
+  //CRIANDO ARRAY COM INFOMAÇÕES VAZIAS
+  let arrayLoader = [{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},];
   createCard(arrayLoader,ranker).forEach((card, i) => {
     container.append(card);
   });
-  document.getElementById("searchContainer").append(container);
-
+  document.getElementById("carouselContainer").append(container);
 }
