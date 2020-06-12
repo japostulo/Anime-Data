@@ -16,7 +16,7 @@ async function loadHome(){
   //redenrizando o html para a criação das openings e endings
   let html = '';
   animeDados.opening_themes.forEach((op, i) => {
-    html += `<tr><td onclick='trigger(this)' style='cursor:pointer' value='${anime.title} Op ${i +1}'> Op. ${i +1} ${op}} </td></tr>`
+    html += `<tr><td onclick='trigger(this)' id='${animeDados.title} opening ${i +1}' style='cursor:pointer'> Op. ${i +1} ${op}} </td></tr>`
   });
   document.getElementById("openings").innerHTML=html;
   html='';
@@ -30,7 +30,7 @@ async function loadHome(){
   document.getElementById('episodes').innerHTML=animeDados.episodes +' episodios, '+animeDados.duration;
 
   //Adicionando vídeo Trailer
-  setTimeout(() => {searchYoutube('Trailer ' + animeDados.title);}, 200);
+  setTimeout(() => {searchYoutube(animeDados.title + ' Official Trailer');}, 200);
 
 }
 
@@ -52,7 +52,6 @@ function loadVideo(id,data){
   document.getElementById("videoTitle").innerHTML = "<h3>" + data.items[0].snippet.title + "</h3>";
 }
 function trigger(obj){
-  console.log(obj);
-  var objValue = obj.innerHTML;
-  searchYoutube('Abertura Naruto '+objValue);
+  console.log(obj.id);
+  searchYoutube('Opening '+ obj.id);
 }

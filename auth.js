@@ -49,7 +49,7 @@ function handleAuthResult(authResult) {
 
 function login() {
     try {
-        gapi.client.setApiKey('AIzaSyA_vx-SIrHFO_iQzHsm1j-cE7_WQ5LBqnA')
+        gapi.client.setApiKey('AIzaSyDrRuopNPpAx52xEW2pZ2854WNd34kQYhw')
         gapi.client.load('youtube', 'v3', function (res) {
         searchYoutube(anime.title + 'Trailer');
         })
