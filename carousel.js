@@ -143,22 +143,23 @@ function setSearchArea(array, idAppend, titleS){
   arrayScroll=array;
 
 }
-var sco = 60;
+localStorage.sco = 60;
 function att(){
   if(document.getElementById("cardAppend")){
 
-    if(document.documentElement.scrollTop > sco){
+    if(document.documentElement.scrollTop > localStorage.sco){
 
       if(arrayScroll.length == 0){
         console.log("ACABOU KRL");
       }else{
         alert("Cards inseridos");
         createCard(arrayScroll.splice(0,10),false).forEach((card,i) => {document.getElementById("cardAppend").append(card)});
-        sco = document.getElementById("cardAppend").clientHeight - window.innerHeight;
+        localStorage.sco = document.getElementById("cardAppend").clientHeight - window.innerHeight;
       }
     }
   }
 }
+
 function createCard(array,ranker){
   console.log(array);
     var cards=[];
