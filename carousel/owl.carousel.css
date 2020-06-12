@@ -5,9 +5,13 @@
   transform: scale(1.1,1.1);
   cursor: pointer;
 }
-.btnCarousel:hover{
-  background-color:#343a40;
+.next:hover{
   transition: 0.3s;
+  background-image:linear-gradient(to left,rgba(0,0,0,0.8) 0,rgba(0,0,0,0.0001) 100%)
+}
+.prev:hover{
+  transition: 0.3s;
+  background-image:linear-gradient(to right,rgba(0,0,0,0.8) 0,rgba(0,0,0,0.0001) 100%)
 }
 .btnCarousel:hover span{
   opacity:1.0;
