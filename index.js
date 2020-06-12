@@ -1,14 +1,15 @@
 async function loadHome(){
-
+  // SEMPRE CHAMAR O CREATE LOADER ANTES DE CHAMAR O CAROUSEL, PARA CRIAR O CONTAINER PARA O CAROUSEL
+  LoaderCarousel('loader1');
+  LoaderCarousel('loader2');
 
   let x = await anime.week();
-  createCarousel(x,"carouselContainer","Animes da semana");
+  createCarousel(x,"loader1","Animes da semana");
 
   setTimeout(async () => {
     let y = await anime.top();
-    createCarousel(y,"carouselContainer","Animes mais assistidos");
+    createCarousel(y,"loader2","Animes mais assistidos");
   }, 4000);
-
 
 }
 
