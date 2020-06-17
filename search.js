@@ -57,7 +57,7 @@ anime = {
 
 function animeSearch(){ return `https://api.jikan.moe/v3/search/anime?q=${ document.getElementById("inputAnime").value}`;}
 
-function animeTop(){ return `http://api.jikan.moe/v3/top/anime/1/tv`;}
+function animeTop(){ return `https://api.jikan.moe/v3/top/anime/1/tv`;}
 
 function animeWeek(week){ return `https://api.jikan.moe/v3/schedule/${week}`;}
 
