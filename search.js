@@ -60,7 +60,7 @@ function animeSearch(){
 }
 
 function animeTop(){
-    return `http://api.jikan.moe/v3/top/anime/1/tv`
+    return `https://api.jikan.moe/v3/top/anime/1/tv`
 }
 
 function animeWeek(week){
