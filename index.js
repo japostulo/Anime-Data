@@ -1,7 +1,7 @@
 async function loadHome(){
   // SEMPRE CHAMAR O CREATE LOADER ANTES DE CHAMAR O CAROUSEL, PARA CRIAR O CONTAINER PARA O CAROUSEL
-  LoaderCarousel('loader1');
-  LoaderCarousel('loader2');
+  LoaderCarousel('loader1',"carouselContainer");
+  LoaderCarousel('loader2',"carouselContainer");
 
   let x = await anime.week();
   createCarousel(x,"loader1","Animes da semana");
@@ -14,14 +14,27 @@ async function loadHome(){
 }
 
 function home(){
-  console.log(this)
   document.getElementById("searchContainer").style.display="none";
   let content = document.getElementById("content");
   content.removeAttribute("style");
 }
 
 async function homeSearch(){
+  var key = event.key;
+  if(key=='Enter'){
 
+    if(document.getElementById("inputAnime").value.length <=2){
+      alert("insira pelo menos 3 caracteres!");
+    }
+    else{
+      let animeName = document.getElementById("inputAnime").value
+      let y = await anime.search();
+      setSearchArea(y,"searchContainer","Sua pesquisa: " + animeName);
+    }
+  }
+}
+
+async function homeSearchClick(){
   if(document.getElementById("inputAnime").value.length <=2){
     alert("insira pelo menos 3 caracteres!");
   }
@@ -42,13 +55,14 @@ function createSearchBar(id){
   input.setAttribute("id", "inputAnime");
   input.setAttribute("class", "form-control");
   input.setAttribute("placeholder", "Pesquisar");
+  input.setAttribute("onkeypress","homeSearch()");
 
   let div = document.createElement("div");
   div.setAttribute("class", "input-group-prepend");
 
   let span = document.createElement("span");
   span.setAttribute("class", "input-group-text fa fa-search");
-  span.setAttribute("onclick", "homeSearch()");
+  span.setAttribute("onclick", "homeSearchClick()");
 
   //Anexando elementos
   div.append(span);

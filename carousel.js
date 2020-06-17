@@ -124,6 +124,9 @@ function tooltipCopy(component){
 
 //FUNÇÃO PARA A CRIAÇÃO DA ÁREA DE PESQUISA COM OS CARDS.
 function setSearchArea(array, idAppend, titleS){
+  let qtdCard=15;
+
+  window.scrollTo(0,0);
   //limpando o conteúdo da pesquisa anterior
   document.getElementById(idAppend).innerHTML="";
 
@@ -146,7 +149,7 @@ function setSearchArea(array, idAppend, titleS){
   //FIM DA CRIAÇÃO DO CONTAINER/TITULO
 
   // Para cada card criado a partir do array, dar um append na div da pesquisa
-  createCard(array.splice(0,10),false).forEach((card, i) => {
+  createCard(array.splice(0,qtdCard),false).forEach((card, i) => {
     document.getElementById("cardAppend").append(card);
   });
 
@@ -177,7 +180,6 @@ function att(){
 
 //FUNÇÃO PARA A CRIAÇÃO DE CARDS PASSANDO COMO PARÂMETRO O ARRAY COM AS INFORMAÇÕES
 function createCard(array,ranker){
-  console.log(array);
     var cards=[];
     let cont =0;
     array.forEach((item,i) => {
@@ -264,15 +266,15 @@ function createCard(array,ranker){
 }
 
 //FUNÇÃO PARA CRIAR O LOADER DO CAROUSEL
-function LoaderCarousel(id){
+function LoaderCarousel(id,idAppend){
   var container = document.createElement("div");
   container.setAttribute("class","row");
   container.setAttribute("id",id);
 
   //CRIANDO ARRAY COM INFOMAÇÕES VAZIAS
   let arrayLoader = [{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},{'score':'...','title':'Carregando...','mal_id':'','image_url':''},];
-  createCard(arrayLoader,ranker).forEach((card, i) => {
+  createCard(arrayLoader,false).forEach((card, i) => {
     container.append(card);
   });
-  document.getElementById("carouselContainer").append(container);
+  document.getElementById(idAppend).append(container);
 }
