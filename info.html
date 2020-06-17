@@ -12,6 +12,30 @@
         border-bottom:3px solid #0275d8;
         transition: 0.5s;
       }
+
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 10rem;
+        height: 10rem;
+        margin: 0 auto;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+
+      }
+
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
     </style>
   </head>
   <body onload="loadHome()">
@@ -36,7 +60,7 @@
         </div>
       </nav>
 
-        <div class="container bg-light">
+        <div class="container bg-light mb-3">
           <!--col video / col info  -->
           <div class="row mt-3">
             <!-- col video -->
@@ -51,7 +75,7 @@
               <div class="row">
                 <div class="col">
                   <div class="" id="colVideo">
-
+                    <div class="loader" style="height: 26rem; width:26rem;"></div>
                   </div>
 
                 </div>
@@ -64,24 +88,25 @@
               </div>
               <div class="row">
                 <div class="col" id="info">
-                  <ul class="" style="list-style:none">
+                  <ul class="p-0" style="list-style:none">
                     <h4>Sinopse</h4>
-                    <li id="synopsis"></li>
+                    <li id="synopsis"> Loading...</li>
                     <h4>Episódios</h4>
-                    <li id='episodes'></li>
+                    <li id='episodes'> Loading...</li>
                   </ul>
                 </div>
               </div>
             </div>
 
+
             <!-- Barra lateral com opening e ending -->
-            <div class="col bg-danger p-2 m-2">
+            <div class="col m-0 p-0 pl-2" style="background-color:#001829">
               <!-- linha com menu de info -->
               <div class="row bg-light p-0 m-0 text-center">
-                <div class="col p-2 infoLink" style="background-color:white" id="btnOpening" onclick="loadOpening(this)">
+                <div class="col p-2 infoLink color-white" style="border-bottom:3px solid #007bff;" id="btnOpening" onclick="loadOpening(this)">
                   Openings
                 </div>
-                <div class="col p-2 infoLink" style="background-color:#dc3545" id="btnEnding" onclick="loadEnding(this)">
+                <div class="col p-2 infoLink" id="btnEnding" onclick="loadEnding(this)">
                   Endings
                 </div>
               </div>
@@ -90,11 +115,14 @@
               <div class="row bg-light m-0 p-0">
                 <div class="col p-0 m-0" id="opening" >
                   <table class="table table-bordered table-hover" id="openings">
-
+                    <tr>
+                      <td>Loading...</td>
+                    </tr>
                   </table>
                 </div>
                 <div class="col d-none p-0 m-0" id="ending" >
                   <table class="table table-bordered table-hover" id="endings">
+
                   </table>
                 </div>
               </div>

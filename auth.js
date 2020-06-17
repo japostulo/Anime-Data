@@ -49,10 +49,8 @@ function handleAuthResult(authResult) {
 
 function login() {
     try {
-        gapi.client.setApiKey('AIzaSyDrRuopNPpAx52xEW2pZ2854WNd34kQYhw')
-        gapi.client.load('youtube', 'v3', function (res) {
-        searchYoutube(anime.title + 'Trailer');
-        })
+        gapi.client.setApiKey('AIzaSyBSrdc1teDhLx2so563DgOoGJTHhDlggaE')
+        gapi.client.load('youtube', 'v3');
     } catch (e) {
         console.error('erro = '+e);
     }

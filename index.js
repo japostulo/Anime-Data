@@ -26,8 +26,9 @@ async function homeSearch(){
     alert("insira pelo menos 3 caracteres!");
   }
   else{
+    let animeName = document.getElementById("inputAnime").value
     let y = await anime.search();
-    setSearchArea(y,"searchContainer","Sua pesquisa");
+    setSearchArea(y,"searchContainer","Sua pesquisa: " + animeName);
   }
 }
 

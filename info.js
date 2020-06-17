@@ -30,21 +30,20 @@ async function loadHome(){
   document.getElementById('episodes').innerHTML=animeDados.episodes +' episodios, '+animeDados.duration;
 
   //Adicionando vídeo Trailer
-  setTimeout(() => {searchYoutube(animeDados.title + ' Official Trailer');}, 200);
-
+  setTimeout(() => {searchYoutube(animeDados.title + ' Official Trailer');}, 500);
 }
 
 function loadOpening(obj){
-  document.getElementById("btnEnding").style.backgroundColor='#dc3545';
+  document.getElementById("btnEnding").style.borderBottom='none';
   document.getElementById("ending").classList.add("d-none");
   document.getElementById("opening").classList.remove("d-none");
-  document.getElementById("btnOpening").style.backgroundColor='white';
+  document.getElementById("btnOpening").style.borderBottom='3px solid #007bff';
 }
 function loadEnding(){
-  document.getElementById("btnEnding").style.backgroundColor='white';
+  document.getElementById("btnOpening").style.borderBottom='none';
   document.getElementById("ending").classList.remove("d-none");
   document.getElementById("opening").classList.add("d-none");
-  document.getElementById("btnOpening").style.backgroundColor='#dc3545';
+  document.getElementById("btnEnding").style.borderBottom='3px solid #007bff';
 }
 function loadVideo(id,data){
   iframe = "<iframe id='YoutubeVideo' class='w-100' style='height:26rem' src='https://www.youtube.com/embed/" + id  + "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
@@ -52,6 +51,5 @@ function loadVideo(id,data){
   document.getElementById("videoTitle").innerHTML = "<h3>" + data.items[0].snippet.title + "</h3>";
 }
 function trigger(obj){
-  console.log(obj.id);
-  searchYoutube('Opening '+ obj.id);
+  searchYoutube(obj.id);
 }

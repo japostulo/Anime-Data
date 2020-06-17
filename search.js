@@ -1,6 +1,7 @@
 
+
 anime = {
-  'search': async () => {
+  async search(){
     try{
       let data = await connectionApi(animeSearch());
       toggleSearchBar("");
@@ -10,7 +11,7 @@ anime = {
       console.log(error)
     }
   },
-  'top': async () => {
+  async top(){
     try{
       let data = await connectionApi(animeTop());
       return data.data.top;
@@ -19,7 +20,7 @@ anime = {
       console.log(error)
     }
   },
-  'week': async () => {
+  async week(){
     try{
       let week = dayOfTheWeek();
       week = week.toLowerCase();
@@ -30,7 +31,7 @@ anime = {
       console.log(error);
     }
   },
-  'data': async (id) => {
+  async data(id){
     try{
       let data = await connectionApi(animeData(id));
       console.log(data.data);
@@ -40,7 +41,7 @@ anime = {
       console.log(error)
     }
   },
-  'gender': async () => {
+  async gender(){
     try{
     let config = {
       mode : 'no-cors'
@@ -54,26 +55,15 @@ anime = {
   },
 }
 
-function animeSearch(){
-   let a = document.getElementById("inputAnime").value;
-  return `https://api.jikan.moe/v3/search/anime?q=${a}`;
-}
+function animeSearch(){ return `https://api.jikan.moe/v3/search/anime?q=${ document.getElementById("inputAnime").value}`;}
 
-function animeTop(){
-    return `http://api.jikan.moe/v3/top/anime/1/tv`
-}
+function animeTop(){ return `http://api.jikan.moe/v3/top/anime/1/tv`;}
 
-function animeWeek(week){
-   return `https://api.jikan.moe/v3/schedule/${week}`;
-}
+function animeWeek(week){ return `https://api.jikan.moe/v3/schedule/${week}`;}
 
-function animeGender(){
-  return `https://api.jikan.moe/v3/genre/anime/1/`
-}
+function animeGender(){ return `https://api.jikan.moe/v3/genre/anime/1/`;}
 
-function animeData(mal_id){
-  return `https://api.jikan.moe/v3/anime/${mal_id}`;
-}
+function animeData(mal_id){ return `https://api.jikan.moe/v3/anime/${mal_id}`;}
 
 async function connectionApi(animeQuery, config ={}){
     return axios.get(animeQuery, config);
@@ -100,6 +90,13 @@ async function searchYoutube(valor) {
   });
   request.execute(function(response) {
     var str = JSON.stringify(response.result);
+    console.log(valor);
+    console.log(response.result);
+    response.result.items.filter((video)=>{
+      if(video.snippet.title.includes("Tokyo Ghoul")){
+        //Fazer condição e terminar
+      }
+    })
     var id = response.result.items[0].id.videoId;
     loadVideo(id, response.result);
   });
