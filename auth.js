@@ -2,7 +2,7 @@
 // at https://console.developers.google.com/.
 // If you run this code from a server other than http://localhost,
 // you need to register your own client ID.
-var OAUTH2_CLIENT_ID = '859461408588-maad6cq43nk0e3rkfqmm98c8st33qp4r.apps.googleusercontent.com';
+var OAUTH2_CLIENT_ID = '1098583120763-11iq7mlnh2thb8baijcm9is0arc4tb3m.apps.googleusercontent.com';
 var OAUTH2_SCOPES = [
   'https://www.googleapis.com/auth/youtube'
 ];
@@ -49,7 +49,7 @@ function handleAuthResult(authResult) {
 
 function login() {
     try {
-        gapi.client.setApiKey('AIzaSyBSrdc1teDhLx2so563DgOoGJTHhDlggaE')
+        gapi.client.setApiKey('AIzaSyB_h4b08fFcdIrjw97_ehcfyAwanULbs38')
         gapi.client.load('youtube', 'v3');
     } catch (e) {
         console.error('erro = '+e);
